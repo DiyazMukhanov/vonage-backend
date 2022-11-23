@@ -10,6 +10,24 @@ const jsonParser = bodyParser.json()
 
 app.use('/api/v1/sessions', sessionRouter );
 
+const getAllSessions = async (req, res, next) => {
+    try{
+        const sessions = await SessionRoom.find();
+        res.status(201).json({
+            status: 'success',
+            data: {
+                sessions
+            }
+        });
+
+    } catch(err) {
+        res.status(404).json({
+            status: 'fail',
+            message: err
+        })
+    }
+}
+
 
 const createSessionRoom = async (req, res, next) => {
     try{
@@ -62,10 +80,12 @@ const getChatRoomToken = async (req, res, next) => {
 }
 
 sessionRouter.route('/')
-    .post(jsonParser, createSessionRoom)
+    .get(jsonParser, getAllSessions);
+
+sessionRouter.route('/')
+    .post(jsonParser, createSessionRoom);
 
 sessionRouter.route('/:id')
-    .get(getChatRoomToken)
-
+    .get(getChatRoomToken);
 
 module.exports = app;
