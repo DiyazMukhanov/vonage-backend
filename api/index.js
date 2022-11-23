@@ -11,11 +11,6 @@ const jsonParser = bodyParser.json()
 app.use('/api/v1/sessions', sessionRouter );
 
 
-
-// Create a session that will attempt to transmit streams directly between
-// clients. If clients cannot connect, the session uses the OpenTok TURN server:
-
-
 const createSessionRoom = async (req, res, next) => {
     try{
         opentok.createSession({ mediaMode: "routed", archiveMode: "always" }, async function(err, session) {
