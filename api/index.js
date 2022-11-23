@@ -1,7 +1,7 @@
 const express = require('express');
 const OpenTok = require('opentok');
 const opentok = new OpenTok('47570931', '3ab20542b94f539189a94509b1bb09e642b1f3bb');
-const SessionRoom = require('./sessionModel');
+const SessionRoom = require('../sessionModel');
 const bodyParser = require('body-parser');
 const app = express();
 const sessionRouter = express.Router();

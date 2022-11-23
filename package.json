@@ -2,7 +2,7 @@
   "name": "ozim-platform",
   "version": "1.0.0",
   "description": "video-courses-platform",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
     "start": "nodemon server.js"
   },
