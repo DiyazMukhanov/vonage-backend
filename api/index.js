@@ -1,9 +1,14 @@
 const express = require('express');
 const OpenTok = require('opentok');
+// const dffds= require('../config.env')
 const opentok = new OpenTok('47570931', '3ab20542b94f539189a94509b1bb09e642b1f3bb');
 const SessionRoom = require('../sessionModel');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const mongoose = require("mongoose");
+
 const app = express();
+// dotenv.config({path: '../config.env'});
 const sessionRouter = express.Router();
 
 const jsonParser = bodyParser.json()
@@ -89,3 +94,25 @@ sessionRouter.route('/:id')
     .get(getChatRoomToken);
 
 module.exports = app;
+
+
+// const app = require('./api');
+// const dotenv = require("dotenv");
+dotenv.config({path: './config.env'});
+
+
+
+const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
+
+mongoose.connect('mongodb+srv://diyaz:Diyaz247757@cluster0.shdge3p.mongodb.net/natours?retryWrites=true&w=majority', {
+    // useNewUrlParser: true,
+    // useCreateIndex: true,
+    // useFindAndModify: false,
+    // useUnifiedTopology: true
+}).then(() =>
+    console.log('DB connection successful')).catch(err => console.log('DB connection failed'));
+
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+});
