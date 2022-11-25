@@ -1,11 +1,12 @@
 const express = require('express');
 const OpenTok = require('opentok');
-// const dffds= require('../config.env')
+const { Video } = require('@vonage/video');
 const opentok = new OpenTok('47570931', '3ab20542b94f539189a94509b1bb09e642b1f3bb');
 const SessionRoom = require('../sessionModel');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const mongoose = require("mongoose");
+const cors = require('cors')
 
 const app = express();
 // dotenv.config({path: '../config.env'});
@@ -13,7 +14,10 @@ const sessionRouter = express.Router();
 
 const jsonParser = bodyParser.json()
 
-app.use('/api/v1/sessions', sessionRouter );
+app.use('/api/v1/sessions', cors(), sessionRouter );
+
+//New platform
+// console.log(Video)
 
 const getAllSessions = async (req, res, next) => {
     try{
